@@ -52,22 +52,15 @@ fi
 
 if [[ $FLOW_GIT_EVENT_TYPE == "pull_request" ]]; then
 
+echo "
 # ********************************************************************************************
-#
-# Github 假如提示 Please make sure you have the correct access rights
+# Git 若提示 Please make sure you have the correct access rights and the repository exists
 # 原因：
-#   没有 clone 该 pull_request 项目的权限
+#     没权限拉取PR的代码
 # 解决方案：
-#   将 deploy_key 在项目中删除(之所以删除，是因为一个 deploy_key 不能添加到多个项目中)，添加到用户的 SSH KEY 中
-#
-# Bitbucket Gitlab 假如提示 Please make sure you have the correct access rights
-# 解决方案
-#   将 deploy_key 直接添加到对应的项目里即可
-#
-# deploy_key 的获取，在 flow.ci 项目的设置页面即可获得
-#
+#     请保证PR关联的项目都在flow.ci上创建
 # ********************************************************************************************
-
+"
 
   flow_cmd "git clone --depth=50 --branch=$FLOW_GIT_TARGET_BRANCH $FLOW_PROJECT_GIT_URL $FLOW_PROJECT_NAME" --echo --assert
   cd $FLOW_PROJECT_NAME
