@@ -60,9 +60,8 @@ echo "
 # 解决方案：
 #     请保证PR关联的项目都在flow.ci上创建
 # ********************************************************************************************
-
-
 "
+
   flow_cmd "git clone --depth=50 --branch=$FLOW_GIT_TARGET_BRANCH $FLOW_PROJECT_GIT_URL $FLOW_PROJECT_NAME" --echo --assert
   cd $FLOW_PROJECT_NAME
   unset "SSH_AUTH_SOCK"
