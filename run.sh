@@ -1,4 +1,4 @@
-# ************************************************************
+ # ************************************************************
 #
 # This step will clone your project code from git
 #
@@ -21,7 +21,47 @@
 # ************************************************************
 
 cd ${FLOW_WORKSPACE}/build
+getFlowProjectPath(){
+    case $FLOW_PROJECT_LANGUAGE in
+        android)
+        filename="gradlew"
+        ;;
+        objc)
+        filename="*.xcodeproj"
+        ;;
+        java)
+        filename="pom.xml"
+        ;;
+        ruby)
+        filename="Gemfile"
+        ;;
+        php)
+        filename="composer.json"
+        ;;
+        python)
+        filename="requirements.txt"
+        ;;
+        nodejs)
+        filename="package.json"
+        ;;
+        *)
+        echo "can not determine the language "
+        ;;
+    esac
+    total=$(find . -name $filename -type f -maxdepth 2)
+    if [ -z "$total" ] ; then
+        echo "No $filename Found"
+    else
+        #判断根目录是否有pom.xml文件
+        fileInRoot=$(find . -name $filename -type f -maxdepth 1)
+        if [ -z "$fileInRoot" ] ; then 
+        echo "No $filename Found at root,we find $filename in submodule and we will build the first submodule"
+        dirOfFile=$(find . -name "pom.xml" -type f -maxdepth 2  | awk -F './' 'NR==1 { print substr($0,3)}')
+        FLOW_PROJECT_PATH=${dirOfFile%/*}
+        fi
+    fi
 
+}
 export PKEY=${FLOW_WORKSPACE}/.ssh/id_rsa
 export GIT_SSH=${FLOW_WORKSPACE}/.ssh/ssh-git.sh
 export FLOW_CURRENT_PROJECT_PATH=$FLOW_WORKSPACE/build/$FLOW_PROJECT_NAME/$FLOW_PROJECT_PATH
@@ -76,3 +116,8 @@ if [ -z $FLOW_GIT_SPECIFIED_COMMIT ]; then
 else
   flow_cmd "git checkout $FLOW_GIT_SPECIFIED_COMMIT" --echo --assert
 fi
+echo $FLOW_CURRENT_PROJECT_PATH
+getFlowProjectPath
+FLOW_CURRENT_PROJECT_PATH+="$FLOW_PROJECT_PATH"
+echo $FLOW_CURRENT_PROJECT_PATH
+echo "cd $FLOW_CURRENT_PROJECT_PATH"
