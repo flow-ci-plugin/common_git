@@ -108,7 +108,7 @@ echo "
 "
 
   flow_cmd "git clone --depth=50 --branch=$FLOW_GIT_TARGET_BRANCH $FLOW_PROJECT_GIT_URL $FLOW_PROJECT_NAME" --echo --assert
-  cd $FLOW_PROJECT_NAME
+  cd "$FLOW_PROJECT_NAME"
   unset "SSH_AUTH_SOCK"
   unset "SSH_AGENT_PID"
   export PKEY=${FLOW_WORKSPACE}/.ssh/id_rsa_target
