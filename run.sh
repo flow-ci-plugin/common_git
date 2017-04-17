@@ -60,6 +60,8 @@ getFlowProjectPath(){
         echo "No $filename Found at root,we find $filename in submodule and we will build the first submodule"
         dirOfFile=$(find . -name $filename -type $type -maxdepth 2  | awk -F './' 'NR==1 { print substr($0,3)}')
         FLOW_PROJECT_PATH=${dirOfFile%/*}
+        #对带空格的目录名进行转义，需要同时修改cache和install、build插件
+        #FINAL_PROJECT_PATH=$(echo $FLOW_PROJECT_PATH | sed 's/ /\\ /g')
         fi
     fi
 
