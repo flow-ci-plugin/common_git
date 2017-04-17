@@ -59,7 +59,7 @@ getFlowProjectPath(){
         if [ -z "$fileInRoot" ] ; then 
         echo "No $filename Found at root,we find $filename in subdirectories and we will build the project in first subdirectory as default"
         dirOfFile=$(find . -name $filename -type $type -maxdepth 2  | awk -F './' 'NR==1 { print substr($0,3)}')
-        #cd "$FLOW_PROJECT_PATH" 必须加上引号才能进入到子目录下
+        #cd "$FLOW_PROJECT_PATH" 必须加上引号才能进入到名字带空格的子目录下
         FLOW_PROJECT_PATH=${dirOfFile%/*}
         #对带空格的目录名进行转义，需要同时修改cache和install、build插件
         #FINAL_PROJECT_PATH=$(echo $FLOW_PROJECT_PATH | sed 's/ /\\ /g')
