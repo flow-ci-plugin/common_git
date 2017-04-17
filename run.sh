@@ -28,6 +28,8 @@ getFlowProjectPath(){
         ;;
         objc)
         filename="*.xcodeproj"
+        #如果是iOS项目，则按照目录查找
+        type="d"
         ;;
         java)
         filename="pom.xml"
@@ -48,15 +50,15 @@ getFlowProjectPath(){
         echo "can not determine the language "
         ;;
     esac
-    total=$(find . -name $filename -type f -maxdepth 2)
+    total=$(find . -name $filename -type $type -maxdepth 2)
     if [ -z "$total" ] ; then
         echo "No $filename Found"
     else
         #判断根目录是否有pom.xml文件
-        fileInRoot=$(find . -name $filename -type f -maxdepth 1)
+        fileInRoot=$(find . -name $filename -type $type -maxdepth 1)
         if [ -z "$fileInRoot" ] ; then 
         echo "No $filename Found at root,we find $filename in submodule and we will build the first submodule"
-        dirOfFile=$(find . -name "pom.xml" -type f -maxdepth 2  | awk -F './' 'NR==1 { print substr($0,3)}')
+        dirOfFile=$(find . -name $filename -type $type -maxdepth 2  | awk -F './' 'NR==1 { print substr($0,3)}')
         FLOW_PROJECT_PATH=${dirOfFile%/*}
         fi
     fi
