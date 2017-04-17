@@ -116,8 +116,8 @@ if [ -z $FLOW_GIT_SPECIFIED_COMMIT ]; then
 else
   flow_cmd "git checkout $FLOW_GIT_SPECIFIED_COMMIT" --echo --assert
 fi
-echo $FLOW_CURRENT_PROJECT_PATH
+#默认按文件进行查找
+type="f"
 getFlowProjectPath
 FLOW_CURRENT_PROJECT_PATH+="$FLOW_PROJECT_PATH"
-echo $FLOW_CURRENT_PROJECT_PATH
-echo "cd $FLOW_CURRENT_PROJECT_PATH"
+
