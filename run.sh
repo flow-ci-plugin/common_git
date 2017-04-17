@@ -54,7 +54,7 @@ getFlowProjectPath(){
     if [ -z "$total" ] ; then
         echo "No $filename Found"
     else
-        #判断根目录是否有pom.xml文件
+        #判断根目录是否有对应的文件
         fileInRoot=$(find . -name $filename -type $type -maxdepth 1)
         if [ -z "$fileInRoot" ] ; then 
         echo "No $filename Found at root,we find $filename in subdirectories and we will build the project in first subdirectory as default"
