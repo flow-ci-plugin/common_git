@@ -73,24 +73,24 @@ export FLOW_CURRENT_PROJECT_PATH=$FLOW_WORKSPACE/build/$FLOW_PROJECT_NAME/$FLOW_
 
 if [[ $FLOW_GIT_EVENT_TYPE == "push" ]]; then
   flow_cmd "git clone --depth=50 --branch=$FLOW_GIT_BRANCH $FLOW_PROJECT_GIT_URL $FLOW_PROJECT_NAME" --echo --assert
-  cd "$FLOW_PROJECT_NAME"
+  cd $FLOW_PROJECT_NAME
 fi
 
 if [[ $FLOW_GIT_EVENT_TYPE == "manual" ]]; then
   flow_cmd "git clone --depth=50 --branch=$FLOW_GIT_BRANCH $FLOW_PROJECT_GIT_URL $FLOW_PROJECT_NAME" --echo --assert
-  cd "$FLOW_PROJECT_NAME"
+  cd $FLOW_PROJECT_NAME
   FLOW_GIT_SPECIFIED_COMMIT="$(git rev-parse HEAD)"
 fi
 
 if [[ $FLOW_GIT_EVENT_TYPE == "timer" ]]; then
   flow_cmd "git clone --depth=50 --branch=$FLOW_GIT_BRANCH $FLOW_PROJECT_GIT_URL $FLOW_PROJECT_NAME" --echo --assert
-  cd "$FLOW_PROJECT_NAME"
+  cd $FLOW_PROJECT_NAME
 fi
 
 
 if [[ $FLOW_GIT_EVENT_TYPE == "tag" ]]; then
   flow_cmd "git clone --depth=50  $FLOW_PROJECT_GIT_URL $FLOW_PROJECT_NAME" --echo --assert
-  cd "$FLOW_PROJECT_NAME"
+  cd $FLOW_PROJECT_NAME
   flow_cmd "git fetch --tags" --echo --assert
   flow_cmd "git checkout $FLOW_GIT_TAG" --echo --assert
 fi
@@ -108,7 +108,7 @@ echo "
 "
 
   flow_cmd "git clone --depth=50 --branch=$FLOW_GIT_TARGET_BRANCH $FLOW_PROJECT_GIT_URL $FLOW_PROJECT_NAME" --echo --assert
-  cd "$FLOW_PROJECT_NAME"
+  cd $FLOW_PROJECT_NAME
   unset "SSH_AUTH_SOCK"
   unset "SSH_AGENT_PID"
   export PKEY=${FLOW_WORKSPACE}/.ssh/id_rsa_target
