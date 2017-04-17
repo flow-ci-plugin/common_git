@@ -57,7 +57,7 @@ getFlowProjectPath(){
         #判断根目录是否有pom.xml文件
         fileInRoot=$(find . -name $filename -type $type -maxdepth 1)
         if [ -z "$fileInRoot" ] ; then 
-        echo "No $filename Found at root,we find $filename in submodule and we will build the first submodule"
+        echo "No $filename Found at root,we find $filename in subdirectories and we will build the project in first subdirectory as default"
         dirOfFile=$(find . -name $filename -type $type -maxdepth 2  | awk -F './' 'NR==1 { print substr($0,3)}')
         FLOW_PROJECT_PATH=${dirOfFile%/*}
         #对带空格的目录名进行转义，需要同时修改cache和install、build插件
