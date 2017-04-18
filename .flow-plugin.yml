@@ -1,40 +1,19 @@
 
 name: git
 version: 0.0.1
-language: 
-description: Clone code from repository
+language:
+description: "主要完成git 仓库的拉取
+- 注意事项
+当您使用跨项目 PR 的时候，请确保两个项目都在flowCI创建对应项目，否则可能出现权限问题。
+您可以在该脚本之后使用本脚本生成的任何环境变量"
 public: true
 tags:
   - git
 inputs:
-  - name: FLOW_GIT_EVENT_TYPE
-    editable: false
-  - name: FLOW_GIT_HOST
-    editable: false
-  - name: FLOW_SECRET_PROJECT_PRIVATE_KEY
-    editable: false
-  - name: FLOW_GIT_BRANCH
-    editable: false
-  - name: FLOW_PROJECT_GIT_URL
-    editable: false
-  - name: FLOW_PROJECT_NAME
-    editable: false
-  - name: FLOW_GIT_CURRENT_BRANCH
-    editable: false
-  - name: FLOW_GIT_CURRENT_SSH_URL
-    editable: false
-  - name: FLOW_GIT_TARGET_BRANCH
-    editable: false
-  - name: FLOW_GIT_SPECIFIED_COMMIT
-    editable: false
-  - name: FLOW_GIT_TAG
-    editable: false
 outputs:
   - name: FLOW_GIT_BRANCH
   - name: FLOW_GIT_SPECIFIED_COMMIT
   - name: FLOW_PROJECT_GIT_URL
-script_path: ./run.sh  
-  
-template: |  
-  
-  
+script_path: ./run.sh
+
+template: |
