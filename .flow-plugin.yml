@@ -1,6 +1,6 @@
 
 name: git
-version: 0.0.1
+version: 0.0.2
 language: 
 description: Clone code from repository
 public: true
@@ -29,6 +29,8 @@ inputs:
     editable: false
   - name: FLOW_GIT_TAG
     editable: false
+  - name: FLOW_CACHE_REPO
+  editable: false
 outputs:
   - name: FLOW_GIT_BRANCH
   - name: FLOW_GIT_SPECIFIED_COMMIT

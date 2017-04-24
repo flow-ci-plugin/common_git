@@ -71,6 +71,12 @@ export PKEY=${FLOW_WORKSPACE}/.ssh/id_rsa
 export GIT_SSH=${FLOW_WORKSPACE}/.ssh/ssh-git.sh
 export FLOW_CURRENT_PROJECT_PATH=$FLOW_WORKSPACE/build/$FLOW_PROJECT_NAME/$FLOW_PROJECT_PATH
 
+if [[ $FLOW_CACHE_REPO == 'TRUE' ]]; then 
+    source mirror.sh
+    fetch_cache
+    export FLOW_PROJECT_GIT_URL=file://${FLOW_LOCAL_REPO}
+fi
+
 if [[ $FLOW_GIT_EVENT_TYPE == "push" ]]; then
   flow_cmd "git clone --depth=50 --branch=$FLOW_GIT_BRANCH $FLOW_PROJECT_GIT_URL $FLOW_PROJECT_NAME" --echo --assert
   cd $FLOW_PROJECT_NAME
