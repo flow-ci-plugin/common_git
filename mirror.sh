@@ -10,5 +10,6 @@ fetch_cache(){
         return 0
     fi
     cd ${FLOW_LOCAL_REPO}
-    git fetch -p origin $FLOW_GIT_BRANCH
+    flow_cmd "git fetch -p origin $FLOW_GIT_BRANCH" --echo --assert
+    cd ${FLOW_WORKSPACE}/build
 }
