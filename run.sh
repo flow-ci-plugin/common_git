@@ -27,19 +27,22 @@ export GIT_SSH=${FLOW_WORKSPACE}/.ssh/ssh-git.sh
 export FLOW_CURRENT_PROJECT_PATH=$FLOW_WORKSPACE/build/$FLOW_PROJECT_NAME/$FLOW_PROJECT_PATH
 
 if [[ $FLOW_GIT_EVENT_TYPE == "push" ]]; then
-  flow_cmd "git clone --branch=$FLOW_GIT_BRANCH $FLOW_PROJECT_GIT_URL $FLOW_PROJECT_NAME" --echo --assert
+  flow_cmd "git clone $FLOW_PROJECT_GIT_URL $FLOW_PROJECT_NAME" --echo --assert
   cd $FLOW_PROJECT_NAME
+  git checkout $FLOW_GIT_BRANCH
 fi
 
 if [[ $FLOW_GIT_EVENT_TYPE == "manual" ]]; then
-  flow_cmd "git clone --branch=$FLOW_GIT_BRANCH $FLOW_PROJECT_GIT_URL $FLOW_PROJECT_NAME" --echo --assert
+  flow_cmd "git clone $FLOW_PROJECT_GIT_URL $FLOW_PROJECT_NAME" --echo --assert
   cd $FLOW_PROJECT_NAME
+  git checkout $FLOW_GIT_BRANCH
   FLOW_GIT_SPECIFIED_COMMIT="$(git rev-parse HEAD)"
 fi
 
 if [[ $FLOW_GIT_EVENT_TYPE == "timer" ]]; then
-  flow_cmd "git clone --branch=$FLOW_GIT_BRANCH $FLOW_PROJECT_GIT_URL $FLOW_PROJECT_NAME" --echo --assert
+  flow_cmd "git clone $FLOW_PROJECT_GIT_URL $FLOW_PROJECT_NAME" --echo --assert
   cd $FLOW_PROJECT_NAME
+  git checkout $FLOW_GIT_BRANCH
 fi
 
 
