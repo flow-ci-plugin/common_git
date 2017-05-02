@@ -1,4 +1,4 @@
- # ************************************************************
+# ************************************************************
 #
 # This step will clone your project code from git
 #
@@ -71,8 +71,21 @@ export PKEY=${FLOW_WORKSPACE}/.ssh/id_rsa
 export GIT_SSH=${FLOW_WORKSPACE}/.ssh/ssh-git.sh
 export FLOW_CURRENT_PROJECT_PATH=$FLOW_WORKSPACE/build/$FLOW_PROJECT_NAME/$FLOW_PROJECT_PATH
 
+FLOW_LOCAL_REPO="/cache/${FLOW_PROJECT_NAME}.git"
+init_local_repo(){
+    flow_cmd "git clone --mirror --depth=50 --branch=$FLOW_GIT_BRANCH $FLOW_PROJECT_GIT_URL $FLOW_LOCAL_REPO" --echo --assert
+}
+fetch_cache(){
+    if [ ! -d $FLOW_LOCAL_REPO ]; then
+        init_local_repo
+        return 0
+    fi
+    cd ${FLOW_LOCAL_REPO}
+    flow_cmd "git fetch -p origin $FLOW_GIT_BRANCH" --echo --assert
+    cd ${FLOW_WORKSPACE}/build
+}
+
 if [[ $FLOW_CACHE_REPO == 'TRUE' ]]; then 
-    source mirror.sh
     fetch_cache
     export FLOW_PROJECT_GIT_URL=file://${FLOW_LOCAL_REPO}
 fi
