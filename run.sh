@@ -87,7 +87,9 @@ fetch_cache(){
 
 if [[ $FLOW_CACHE_REPO == 'TRUE' ]]; then 
     fetch_cache
-    export FLOW_PROJECT_GIT_URL=file://${FLOW_LOCAL_REPO}
+    if [ $? == 0 ];then
+        export FLOW_PROJECT_GIT_URL=file://${FLOW_LOCAL_REPO}
+    fi
 fi
 
 if [[ $FLOW_GIT_EVENT_TYPE == "push" ]]; then
