@@ -30,7 +30,7 @@ inputs:
   - name: FLOW_GIT_TAG
     editable: false
   - name: FLOW_CACHE_REPO
-  editable: false
+    editable: false
 outputs:
   - name: FLOW_GIT_BRANCH
   - name: FLOW_GIT_SPECIFIED_COMMIT
