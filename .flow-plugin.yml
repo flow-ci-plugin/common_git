@@ -1,9 +1,13 @@
 
 name: git
 version: 0.0.2
-language: 
-description: 从 Git 仓库 clone
+language:
+description: "主要完成git 仓库的拉取
+- 注意事项
+当您使用跨项目 PR 的时候，请确保两个项目都在 flow.ci 创建对应项目，否则可能出现权限问题。
+您可以在该脚本之后使用本脚本生成的任何环境变量"
 public: true
+
 tags:
   - git
   
@@ -25,3 +29,4 @@ script_path: ./run.sh
 template: |  
   
   
+
