@@ -13,7 +13,7 @@ inputs:
     desc_cn: "缓存git仓库"
     desc_en: "Enable repo cache"
     category: "switcher"
-    default: 'TRUE'
+    default: 'FALSE'
     
 outputs:
   - name: FLOW_GIT_BRANCH
