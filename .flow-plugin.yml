@@ -2,7 +2,7 @@
 name: git
 version: 0.0.2
 language: 
-description: Clone code from repository
+description: 从 Git 仓库 clone
 public: true
 tags:
   - git
@@ -10,8 +10,8 @@ tags:
 inputs:
   - name: FLOW_CACHE_REPO
     editable: true
-    desc_cn: "缓存git仓库"
-    desc_en: "Enable repo cache"
+    desc_cn: "缓存 git 仓库"
+    desc_en: "Git repo cache"
     category: "switcher"
     default: 'FALSE'
     
