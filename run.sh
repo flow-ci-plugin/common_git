@@ -117,6 +117,8 @@ if [[ $FLOW_GIT_EVENT_TYPE == "tag" ]]; then
   cd $FLOW_PROJECT_NAME
   flow_cmd "git fetch --tags" --echo --assert
   flow_cmd "git checkout $FLOW_GIT_TAG" --echo --assert
+  
+  export FLOW_GIT_TAG = $FLOW_GIT_TAG
 fi
 
 if [[ $FLOW_GIT_EVENT_TYPE == "pull_request" ]]; then
